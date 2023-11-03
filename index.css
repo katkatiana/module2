@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&family=Lato:wght@300;400;700&family=Montserrat:ital,wght@0,400;1,600&family=Roboto&display=swap');
+
+body {
+    margin: 0;
+    font-family: 'Lato', sans-serif;
+}
+
+nav {
+    margin-bottom: 20px;
+    padding: 10px;
+    color: white;
+    display: flex;
+    box-shadow: 0 5px 10px 0 rgba(0,0,0,.2);
+    background-color: #1F4E82;
+    border-radius: 1%/15%;
+}
+
+.my-logo {
+    width: 5%;
+    border-radius: 30%;
+}
+
+nav h1 {
+    margin-inline: 40%;
+}
+
+.site-intro {
+    text-align: center;
+}
+
+span {
+    padding-inline: 10px;
+}
+
+#counter {
+    margin-left: 10px;
+}
+.inputs-elements {
+    margin-inline: 10px;
+    margin-top: 50px;
+}
+
+button {
+    display: block;
+    margin-top: 20px;
+    margin-inline: 230px;
+    border-radius: 10px;
+    border-color: lightgray;
+    color: #1F4E82;
+    font-weight: 600;
+    padding: 3px;
+}
+
+button::after {
+    content : "🔎";
+}
+

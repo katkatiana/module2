@@ -24,17 +24,6 @@ REQUISITI:
 
 - la tua ricerca deve essere "case insensitive" (non deve essere influenzata da lettere maiuscole o minuscole nelle parole cercate). Questo e' possibile trasformando tutto in lettere minuscole con .toLowerCase()
 
-
-PARTE 2: 
-Nella pagina HTML, inserisci 2 input di tipo testo (uno per la location e uno per il titolo lavorativo, ricordati di diversificarli con un id) e un bottone con valore “cerca”
-
-Al click del bottone, il codice deve raccogliere i valori dei due input e darli in pasto alla funzione che hai creato nella parte 1. 
-
-Dopo aver raccolto ed elaborato i dati, e’ il momento di mostrare i risultati sulla pagina: 
-    Puoi scegliere tu se utilizzare un semplice ul / li oppure una tabella 
-    Vai passo per passo e usa molti console.log per capire eventualmente dove sbagli
-    SUGGERIMENTO: ti servira’ un ciclo for!
-
 */
 
 // NON MODIFICARE QUESTO ARRAY!
@@ -126,25 +115,59 @@ const jobs = [
   },
 ]
  
+// creo una funzione che prende in ingresso due parametri che corrisponderanno a title e location dell'array di oggetti ("database")
+/**
+ * 
+ * @param {*} jobType Job Type
+ * @param {*} jobLocation Job Location
+ * @returns An object with 2 properties ()
+ */
 
 const mySearch = function(jobType, jobLocation) {  
-  let found = false;
-  let arrSearch = []
-  let finalObj = {result: [], count : 0}
-  for (let i = 0; i < jobs.length; i++) {
-    const everyJobType = jobs[i].title.toLowerCase()
-    const everyLocation = jobs[i].location.toLowerCase()
-    if ((everyJobType.includes(jobType.toLowerCase())) && (everyLocation.includes(jobLocation.toLowerCase()))) {
+  let found = false; //dichiaro una variabile booleana per vagliare il caso in cui non ci siano corrispondenze
+  let arrSearch = [] //dichiaro un array vuoto che andrò a riempire con i risultati della ricerca
+  let finalObj = {result: [], count : 0} //dichiaro un oggetto vuoto che raccoglierà i risultati ottenuti e il numero finale di ricerche corrispondenti
+  //per entrare in ogni elemento dell'array, genero un loop che parta da 0 e si ripeta per ogni elemento contenuto nell'array jobs
+  for (let i = 0; i < jobs.length; i++) { 
+    const everyJobType = jobs[i].title.toLowerCase() //conservo il valore della proprietà title in una variabile e rendo tutti i caratteri minuscoli
+    const everyLocation = jobs[i].location.toLowerCase() //stesso ragionamento di sopra ma con il valore di location
+    /* imposto le condizioni della ricerca, ovvero la funzione dovrà cercare se tra i due parametri in ingresso forniti e i valori di title 
+     e location c'è corrispondenza anche se sono scritti in minuscolo e se sono corrispondenze parziali (rendo la funzione case insensitive)*/
+    if ((everyJobType.includes(jobType.toLowerCase())) && (everyLocation.includes(jobLocation.toLowerCase()))) { 
       found = true;
-      arrSearch.push(jobs[i])
+      arrSearch.push(jobs[i]) //se le condizioni sono soddisfatte, riempie l'oggetto con i valori degli oggetti dell'array jobs iniziale (database)
     }  
   }
-  if (!found) {
+  if (!found) { //se le condizioni non sono soddisfatte, la booleana risulterà falsa e si stamperà un messaggio di no results
     console.log("Sorry, no results found")
   }
-  finalObj.result = arrSearch;
-  finalObj.count = arrSearch.length
+  finalObj.result = arrSearch; //si riempie l'oggetto finale che uscirà in console con i valori dell'array generato
+  finalObj.count = arrSearch.length //si aggiunge come proprietà dell'oggetto il numero di elementi trovati pari alla lunghezza dell'array
   return finalObj
 }
-const firstTry = mySearch("cust", "")
-console.log(firstTry)
+/* const firstTry = mySearch("cust", "")
+console.log(firstTry) */
+
+
+// PARTE 2
+//per riuscire ad ottenere i risultati ricavati dalla ricerca della funzione mySearch() serve rendere i parametri di ingresso della funzione corrispondenti agli input dell'HTML
+const collectInputs = function() {
+  const firstInput = document.querySelector("input#job-type-search").value //ricavo e conservo i valori (prioprietà .value) degli input differenziati per id
+  const secondInput = document.querySelector("input#location-search").value
+  const objResults = mySearch(firstInput, secondInput) //conservo il valore di ritorno della funzione mySearch in cui i due parametri corrispondono al valore degli input
+  const values = document.querySelector("ul") //seleziono l'ul ancora privo di li
+  const finalCounter = document.querySelector("#counter")
+  finalCounter.innerText = "Results found: " + objResults.count
+  values.innerHTML = ""
+  //genero e riempio la lista rendendo ogni li uguale alle due proprietà dell'iesimo elemento dell'array result contenuto nell'oggetto objResults
+  for (let i = 0; i < objResults.result.length; i++) {
+     values.innerHTML += `<li>${objResults.result[i].title} ${objResults.result[i].location}</li>`
+     
+     /*  altra soluzione possibile usando .createElement() + .appendChild()
+    const everyLi = document.createElement("li")
+    everyLi.innerText = objResults.result[i].title + objResults.result[i].location
+    values.appendChild(everyLi) */
+  }
+
+}
+
