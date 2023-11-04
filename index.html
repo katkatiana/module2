@@ -14,7 +14,7 @@ Al click del bottone, il codice deve raccogliere i valori dei due input e darli 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>jDreams- Your Dream Job</title>
     <link rel="stylesheet" href="index.css">
 
 </head>
@@ -23,6 +23,7 @@ Al click del bottone, il codice deve raccogliere i valori dei due input e darli 
     <nav>
         <img class ="my-logo" src="./images/dream-job-logo.png" alt="logo-img">
         <h1 id ="title">jDreams</h1>
+        <h2>jDreams</h2>
     </nav>
 
     <p class = "site-intro">Are you looking for a new job? It is your first experience or you just want to know what else the world has to offer?</p>
@@ -31,13 +32,14 @@ Al click del bottone, il codice deve raccogliere i valori dei due input e darli 
     <div class = "inputs-elements">
     <span>Job Type</span><input type = "text" id = "job-type-search"/>
     <span>Location</span><input type = "text" id = "location-search"/>
+    <button onclick="collectAndShow()">Search</button>
     </div>
-    <button onclick="collectInputs()">Search</button>
     <p id = "counter"></p>
-    <ul>
-        
-    </ul>
+    <div class = "list">
+        <ul>
 
+        </ul>
+    </div>
     <script src="index.js"></script>
 </body>
 </html>

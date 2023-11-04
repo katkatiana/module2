@@ -10,9 +10,14 @@ nav {
     padding: 10px;
     color: white;
     display: flex;
+    justify-content: space-between;
     box-shadow: 0 5px 10px 0 rgba(0,0,0,.2);
     background-color: #1F4E82;
     border-radius: 1%/15%;
+}
+
+h2 {
+    visibility: hidden;
 }
 
 .my-logo {
@@ -20,11 +25,11 @@ nav {
     border-radius: 30%;
 }
 
-nav h1 {
-    margin-inline: 40%;
-}
+/* nav h1 {
+    margin-left: 42%; 
+} */
 
-.site-intro {
+.site-intro, #counter{
     text-align: center;
 }
 
@@ -36,22 +41,25 @@ span {
     margin-left: 10px;
 }
 .inputs-elements {
-    margin-inline: 10px;
     margin-top: 50px;
+    align-items: center;
 }
 
 button {
-    display: block;
-    margin-top: 20px;
-    margin-inline: 230px;
     border-radius: 10px;
     border-color: lightgray;
     color: #1F4E82;
     font-weight: 600;
-    padding: 3px;
+    margin-left: 10px;
+
 }
 
 button::after {
     content : "🔎";
+}
+
+.list, .inputs-elements {
+    display: flex;
+    justify-content: center;
 }
 

@@ -151,23 +151,28 @@ console.log(firstTry) */
 
 // PARTE 2
 //per riuscire ad ottenere i risultati ricavati dalla ricerca della funzione mySearch() serve rendere i parametri di ingresso della funzione corrispondenti agli input dell'HTML
-const collectInputs = function() {
+const collectAndShow = function() {
   const firstInput = document.querySelector("input#job-type-search").value //ricavo e conservo i valori (prioprietà .value) degli input differenziati per id
   const secondInput = document.querySelector("input#location-search").value
-  const objResults = mySearch(firstInput, secondInput) //conservo il valore di ritorno della funzione mySearch in cui i due parametri corrispondono al valore degli input
   const values = document.querySelector("ul") //seleziono l'ul ancora privo di li
   const finalCounter = document.querySelector("#counter")
-  finalCounter.innerText = "Results found: " + objResults.count
-  values.innerHTML = ""
-  //genero e riempio la lista rendendo ogni li uguale alle due proprietà dell'iesimo elemento dell'array result contenuto nell'oggetto objResults
-  for (let i = 0; i < objResults.result.length; i++) {
-     values.innerHTML += `<li>${objResults.result[i].title} ${objResults.result[i].location}</li>`
-     
-     /*  altra soluzione possibile usando .createElement() + .appendChild()
-    const everyLi = document.createElement("li")
-    everyLi.innerText = objResults.result[i].title + objResults.result[i].location
-    values.appendChild(everyLi) */
-  }
+  if((firstInput === "") || (secondInput === "")) {
+    values.innerHTML = ""
+    finalCounter.innerText = ""
+    alert("You have to insert Job type and Location first")
+  } else {
+    const objResults = mySearch(firstInput, secondInput) //conservo il valore di ritorno della funzione mySearch in cui i due parametri corrispondono al valore degli input
+    finalCounter.innerText = "Results found: " + objResults.count
+    values.innerHTML = ""
+    //genero e riempio la lista rendendo ogni li uguale alle due proprietà dell'iesimo elemento dell'array result contenuto nell'oggetto objResults
+    for (let i = 0; i < objResults.result.length; i++) {
+       values.innerHTML += `<li>${objResults.result[i].title} ${objResults.result[i].location}</li>`
 
+       /*  altra soluzione possibile usando .createElement() + .appendChild()
+      const everyLi = document.createElement("li")
+      everyLi.innerText = objResults.result[i].title + objResults.result[i].location
+      values.appendChild(everyLi) */
+    }
+  }
 }
 
